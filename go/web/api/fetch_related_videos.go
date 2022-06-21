@@ -14,7 +14,7 @@ func FetchRelatedVideos() echo.HandlerFunc {
 		videoId := c.Param("id")
 
 		call := yts.Search.
-			List("id,snippet").
+			List([]string{"id,snippet"}).
 			RelatedToVideoId(videoId).
 			Type("video").
 			MaxResults(3)

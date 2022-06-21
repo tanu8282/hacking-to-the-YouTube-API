@@ -14,7 +14,7 @@ func SearchVideos() echo.HandlerFunc {
 		query := c.QueryParam("q")
 
 		call := yts.Search.
-			List("id,snippet").
+			List([]string{"id,snippet"}).
 			Q(query).
 			MaxResults(3)
 
