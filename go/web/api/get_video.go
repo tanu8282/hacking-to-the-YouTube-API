@@ -2,10 +2,10 @@ package api
 
 import (
 	"firebase.google.com/go/auth"
-	"github.com/aiiro/youtube-manager-go/middlewares"
-	"github.com/aiiro/youtube-manager-go/models"
 	"github.com/labstack/echo"
 	"github.com/sirupsen/logrus"
+	"github.com/tanu8282/hacking-to-the-YouTube-API/go/middlewares"
+	"github.com/tanu8282/hacking-to-the-YouTube-API/go/models"
 	"github.com/valyala/fasthttp"
 	"google.golang.org/api/youtube/v3"
 )
@@ -40,7 +40,7 @@ func GetVideo() echo.HandlerFunc {
 		}
 
 		call := yts.Videos.
-			List("id,snippet").
+			List([]string{"id,snippet"}).
 			Id(videoId)
 
 		res, err := call.Do()

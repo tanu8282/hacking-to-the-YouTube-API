@@ -1,9 +1,9 @@
 package main
 
 import (
-	"github.com/aiiro/youtube-manager-go/databases"
-	"github.com/aiiro/youtube-manager-go/models"
 	"github.com/sirupsen/logrus"
+	"github.com/tanu8282/hacking-to-the-YouTube-API/go/databases"
+	"github.com/tanu8282/hacking-to-the-YouTube-API/go/models"
 )
 
 func main() {

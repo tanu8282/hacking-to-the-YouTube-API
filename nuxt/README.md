@@ -1,4 +1,4 @@
-# youtube-manager-nuxt
+# hacking-to-the-YouTube-API
 
 > My impressive Nuxt.js project
 

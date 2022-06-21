@@ -1,12 +1,12 @@
 package main
 
 import (
-	"github.com/aiiro/youtube-manager-go/middlewares"
-	"github.com/aiiro/youtube-manager-go/routes"
 	"github.com/joho/godotenv"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 	"github.com/sirupsen/logrus"
+	"github.com/tanu8282/hacking-to-the-YouTube-API/go/middlewares"
+	"github.com/tanu8282/hacking-to-the-YouTube-API/go/routes"
 )
 
 func init() {

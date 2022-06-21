@@ -1,9 +1,9 @@
 package middlewares
 
 import (
-	"github.com/aiiro/youtube-manager-go/databases"
 	"github.com/jinzhu/gorm"
 	"github.com/labstack/echo"
+	"github.com/tanu8282/hacking-to-the-YouTube-API/go/databases"
 )
 
 type DatabaseClient struct {

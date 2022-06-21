@@ -1,9 +1,9 @@
 package routes
 
 import (
-	"github.com/aiiro/youtube-manager-go/middlewares"
-	"github.com/aiiro/youtube-manager-go/web/api"
 	"github.com/labstack/echo"
+	"github.com/tanu8282/hacking-to-the-YouTube-API/go/middlewares"
+	"github.com/tanu8282/hacking-to-the-YouTube-API/go/web/api"
 )
 
 func Init(e *echo.Echo) {
