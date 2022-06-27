@@ -1,0 +1,63 @@
+version: '3.1'
+
+services:
+  frontend:
+    container_name: nuxt
+    build: ./nuxt/
+    image: nuxt 
+    volumes:
+      - ./nuxt:/app
+    ports:
+      - 3000:3000
+    environment:
+      - HOST=0.0.0.0
+    # command: "npm run dev"
+    networks:
+      # app_net:
+      #   ipv4_address: '172.20.0.4'     
+      - golang_test_network
+  go:
+    container_name: go
+    build:
+      context: ./go
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    env_file:
+      - ./go/.env
+    # depends_on:
+    #   - db
+    volumes:
+      - type: bind
+        source: ./go
+        target: /app
+    tty: true
+    networks:
+      - golang_test_network
+
+  # db:  # awsのRDSを使用するため不要
+  #   platform: linux/x86_64
+  #   image: mysql:5.7
+  #   container_name: dockerMySQL
+  #   command: >
+  #     --character-set-server=utf8mb4
+  #     --collation-server=utf8mb4_unicode_ci
+  #   environment:
+  #     - MYSQL_DATABASE=youtube
+  #     - MYSQL_ROOT_PASSWORD=pass
+  #     - MYSQL_USER=default
+  #     - MYSQL_PASSWORD=password
+  #     - TZ=Asia/Tokyo
+  #   ports:
+  #     - "4306:3306"
+  #   volumes:
+  #     - dbdata:/var/lib/mysql
+  #   networks:
+  #     - golang_test_network
+
+volumes:
+  dbdata:
+
+networks:
+  golang_test_network:
+    external: true
