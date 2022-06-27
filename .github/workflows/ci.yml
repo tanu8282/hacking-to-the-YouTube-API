@@ -1,54 +1,39 @@
-name: go-ci
-
 on: [push]
-
+name: Test
 jobs:
-  # 共通処理
-  setup:
-    runs-on: ubuntu-latest
-    steps:
-      - name: set up
-        uses: actions/setup-go@v2
-        with:
-          go-version: ^1.18.3
-        id: go
-      - name: check out
-        uses: actions/checkout@v2
-
-      # 処理を高速化するために環境をキャッシュ
-      - name: Cache
-        uses: actions/cache@v2.1.0
-        with:
-          path: ~/go/pkg/mod
-          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
-          restore-keys: |
-            ${{ runner.os }}-go-
-
-  # buildテスト
-  build:
-    needs: setup
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: build
-        run: go build ./go/...
-
-  # testを通す
   test:
-    needs: setup
-    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        go-version: [1.18.3]
+        os: [ubuntu-latest]
+    runs-on: ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v2
-      - name: test
-        run: go test ./go/... -v
+    - uses: actions/setup-go@v3
+      with:
+        go-version: ${{ matrix.go-version }}
+    - uses: actions/checkout@v3
+    - run: go test ./...
 
-  # lintを通す
-  lint:
-    needs: setup
+  test-cache:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - name: golangci-lint
-        uses: golangci/golangci-lint-action@v2
-        with:
-          version: v1.29
+    - uses: actions/setup-go@v3
+      with:
+        go-version: 1.18.x
+    - uses: actions/checkout@v3
+    - uses: actions/cache@v3
+      with:
+        # In order:
+        # * Module download cache
+        # * Build cache (Linux)
+        # * Build cache (Mac)
+        # * Build cache (Windows)
+        path: |
+          ~/go/pkg/mod
+          ~/.cache/go-build
+          ~/Library/Caches/go-build
+          ~\AppData\Local\go-build
+        key: ${{ runner.os }}-go-${{ matrix.go-version }}-${{ hashFiles('**/go.sum') }}
+        restore-keys: |
+          ${{ runner.os }}-go-${{ matrix.go-version }}-
+    - run: go test ./...
