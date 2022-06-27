@@ -31,7 +31,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: build
-        run: pwd && cd ./go && go mod tidy && go build 
+        run: pwd && cd ./go && go build 
 
   # testを通す
   test:
