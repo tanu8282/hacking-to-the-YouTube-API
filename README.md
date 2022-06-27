@@ -6,9 +6,9 @@ go言語によるバックエンドの開発を模擬することを目的にし
 
 ## Env
 
-node: v16.15.0
-nuxt: v2.9.1
-echo: v3.3.10
+* node: v16.15.0
+* nuxt: v2.9.1
+* echo: v3.3.10
 
 
 ## Start
@@ -36,7 +36,7 @@ go run ./tools/migrate.go
 
 ## Infra構成図
 
-TODO: 以下、ポンチ絵のため時間があったら正しく書き直す
+TODO: 以下、ポンチ絵のため少し雑に記載。時間があったら正しく書き直す
 ![](images/infra構成図.png)
 
 ## Refs
