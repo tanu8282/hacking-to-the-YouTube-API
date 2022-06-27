@@ -31,7 +31,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: build
-        run: go init && go build ./go/server.go
+        run: go mod init && go build ./go/server.go
 
   # testを通す
   test:
