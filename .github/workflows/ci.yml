@@ -40,4 +40,14 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: test
-        run: cd ./go && go test -v
+        run: |
+          cd ./go
+          touch .env
+          echo "{{ secrets.API_KEY }}" >> .env
+          echo "{{ secrets.DB_DATABASE }}" >> .env
+          echo "{{ secrets.DB_PASSWORD }}" >> .env
+          echo "{{ secrets.DB_PORT }}" >> .env
+          echo "{{ secrets.DB_USERNAME }}" >> .env
+          echo "{{ secrets.KEY_JSON_PATH }}" >> .env
+          echo "{{ secrets.PROJECT_ID }}" >> .env
+          go test -v
