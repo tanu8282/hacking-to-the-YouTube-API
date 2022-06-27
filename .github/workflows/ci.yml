@@ -31,7 +31,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: build
-        run: pwd && cd ./go && go build 
+        run: cd ./go && go build 
 
   # testを通す
   test:
@@ -40,4 +40,4 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: test
-        run: go test ./go/... -v
+        run: cd ./go && go test -v
