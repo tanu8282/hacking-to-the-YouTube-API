@@ -35,13 +35,12 @@ jobs:
 
   # testを通す
   test:
-    needs: build
+    needs: setup
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: test
         run: |
-          cd ./go
           touch .env
           echo "{{ secrets.API_KEY }}" >> .env
           echo "{{ secrets.DB_DATABASE }}" >> .env
@@ -50,4 +49,5 @@ jobs:
           echo "{{ secrets.DB_USERNAME }}" >> .env
           echo "{{ secrets.KEY_JSON_PATH }}" >> .env
           echo "{{ secrets.PROJECT_ID }}" >> .env
+          cd ./go
           go test -v
