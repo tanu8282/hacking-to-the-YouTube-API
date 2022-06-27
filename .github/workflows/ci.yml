@@ -37,19 +37,16 @@ jobs:
   test:
     needs: setup
     runs-on: ubuntu-latest
+    env:
+      API_KEY: ${{ secrets.API_KEY }}
+      DB_DATABASE: ${{ secrets.DB_DATABASE }}
+      DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+      DB_PORT: ${{ secrets.DB_PORT }}
+      DB_USERNAME: ${{ secrets.DB_USERNAME }}
+      KEY_JSON_PATH: ${{ secrets.KEY_JSON_PATH }}
+      PROJECT_ID: ${{ secrets.PROJECT_ID }}
     steps:
       - uses: actions/checkout@v2
       - name: test
       - run: |
-          cd ./go
-      - run: |
-          touch .env
-          echo "{{ secrets.API_KEY }}" >> .env
-          echo "{{ secrets.DB_DATABASE }}" >> .env
-          echo "{{ secrets.DB_PASSWORD }}" >> .env
-          echo "{{ secrets.DB_PORT }}" >> .env
-          echo "{{ secrets.DB_USERNAME }}" >> .env
-          echo "{{ secrets.KEY_JSON_PATH }}" >> .env
-          echo "{{ secrets.PROJECT_ID }}" >> .env
-      - run: |
-          go test -v
+          cd ./go && go test -v
